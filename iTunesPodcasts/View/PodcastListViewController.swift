@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PodcastListViewController.swift
 //  iTunesPodcasts
 //
 //  Created by Florin Uscatu on 11.05.2022.
@@ -7,12 +7,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+enum PodcastSection {
+    case main
+}
 
+typealias PodcastDataSource = UITableViewDiffableDataSource<PodcastSection, Podcast>
+typealias PodcastSnapshot = NSDiffableDataSourceSnapshot<PodcastSection, Podcast>
+
+class PodcastListViewController: UIViewController {
+
+    private let viewModel: PodcastListViewModel
+    
     weak var coordinator: MainCoordinator?
     
     private var searchBar: UISearchBar!
     private var tableView: UITableView!
+    
+    init(viewModel: PodcastListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +40,12 @@ class ViewController: UIViewController {
         title = "Podcasts"
         
         addViews()
+        
+        viewModel.dataSource = createDataSource()
+        
+        tableView.registerCell(PodcastCell.self)
+        
+        viewModel.getData()
     }
     
     private func addViews() {
@@ -45,7 +69,7 @@ class ViewController: UIViewController {
         tableView = UITableView()
         
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.keyboardDismissMode = .interactive
         
         view.addSubview(tableView)
         
@@ -57,22 +81,22 @@ class ViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
+    private func createDataSource() -> PodcastDataSource {
+        return PodcastDataSource(tableView: tableView) { (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+            let podcastCellViewModel = PodcastCellViewModel(podcast: itemIdentifier)
+            let cell: PodcastCell = tableView.dequeueCell()
+            cell.viewModel = podcastCellViewModel
+            return cell
+        }
+    }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        var configuration = cell.defaultContentConfiguration()
-        configuration.text = "sdf"
-        cell.contentConfiguration = configuration
-        return cell
-    }
-    
+extension PodcastListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

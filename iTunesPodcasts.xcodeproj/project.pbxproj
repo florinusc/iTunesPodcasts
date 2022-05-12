@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F5B07C6282C1E9000122600 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07C5282C1E9000122600 /* Podcast.swift */; };
+		9F5B07C8282C1FAC00122600 /* PodcastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07C7282C1FAC00122600 /* PodcastListViewModel.swift */; };
+		9F5B07CA282C22F800122600 /* PodcastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07C9282C22F800122600 /* PodcastCellViewModel.swift */; };
+		9F5B07CD282D6C9200122600 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5B07CC282D6C9200122600 /* AlamofireImage */; };
+		9F5B07CF282D6CED00122600 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */; };
 		9F71D9FA282B90A100F06C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9F9282B90A100F06C2F /* AppDelegate.swift */; };
 		9F71D9FC282B90A100F06C2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */; };
-		9F71D9FE282B90A100F06C2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FD282B90A100F06C2F /* ViewController.swift */; };
+		9F71D9FE282B90A100F06C2F /* PodcastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FD282B90A100F06C2F /* PodcastListViewController.swift */; };
 		9F71DA03282B90A500F06C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F71DA02282B90A500F06C2F /* Assets.xcassets */; };
 		9F71DA06282B90A500F06C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F71DA04282B90A500F06C2F /* LaunchScreen.storyboard */; };
 		9F71DA11282B90A600F06C2F /* iTunesPodcastsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA10282B90A600F06C2F /* iTunesPodcastsTests.swift */; };
 		9F71DA2B282B925500F06C2F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA2A282B925500F06C2F /* Coordinator.swift */; };
 		9F71DA2D282B926F00F06C2F /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA2C282B926F00F06C2F /* MainCoordinator.swift */; };
+		9F71DA33282B9B2900F06C2F /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA32282B9B2900F06C2F /* PodcastCell.swift */; };
+		9F71DA37282B9CD300F06C2F /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F5B07C5282C1E9000122600 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		9F5B07C7282C1FAC00122600 /* PodcastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastListViewModel.swift; sourceTree = "<group>"; };
+		9F5B07C9282C22F800122600 /* PodcastCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCellViewModel.swift; sourceTree = "<group>"; };
+		9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		9F71D9F6282B90A100F06C2F /* iTunesPodcasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesPodcasts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F71D9F9282B90A100F06C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9F71D9FD282B90A100F06C2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9F71D9FD282B90A100F06C2F /* PodcastListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastListViewController.swift; sourceTree = "<group>"; };
 		9F71DA02282B90A500F06C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F71DA05282B90A500F06C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F71DA07282B90A500F06C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +58,8 @@
 		9F71DA16282B90A600F06C2F /* iTunesPodcastsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesPodcastsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F71DA2A282B925500F06C2F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		9F71DA2C282B926F00F06C2F /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		9F71DA32282B9B2900F06C2F /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
+		9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5B07CD282D6C9200122600 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F5B07C4282C1E8600122600 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F5B07C5282C1E9000122600 /* Podcast.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9F71D9ED282B90A100F06C2F = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +118,8 @@
 		9F71D9F8282B90A100F06C2F /* iTunesPodcasts */ = {
 			isa = PBXGroup;
 			children = (
+				9F5B07C4282C1E8600122600 /* Model */,
+				9F71DA34282B9CC100F06C2F /* Helpers */,
 				9F71DA30282B931500F06C2F /* View */,
 				9F71DA2F282B930B00F06C2F /* Resources */,
 				9F71DA2E282B92FD00F06C2F /* Project Files */,
@@ -143,9 +167,37 @@
 		9F71DA30282B931500F06C2F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9F71D9FD282B90A100F06C2F /* ViewController.swift */,
+				9F71DA31282B9B1C00F06C2F /* Cell */,
+				9F71D9FD282B90A100F06C2F /* PodcastListViewController.swift */,
+				9F5B07C7282C1FAC00122600 /* PodcastListViewModel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9F71DA31282B9B1C00F06C2F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9F71DA32282B9B2900F06C2F /* PodcastCell.swift */,
+				9F5B07C9282C22F800122600 /* PodcastCellViewModel.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9F71DA34282B9CC100F06C2F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9F71DA35282B9CC700F06C2F /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9F71DA35282B9CC700F06C2F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */,
+				9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +216,9 @@
 			dependencies = (
 			);
 			name = iTunesPodcasts;
+			packageProductDependencies = (
+				9F5B07CC282D6C9200122600 /* AlamofireImage */,
+			);
 			productName = iTunesPodcasts;
 			productReference = 9F71D9F6282B90A100F06C2F /* iTunesPodcasts.app */;
 			productType = "com.apple.product-type.application";
@@ -236,6 +291,9 @@
 				Base,
 			);
 			mainGroup = 9F71D9ED282B90A100F06C2F;
+			packageReferences = (
+				9F5B07CB282D6C9200122600 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			productRefGroup = 9F71D9F7282B90A100F06C2F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -279,9 +337,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F71DA2B282B925500F06C2F /* Coordinator.swift in Sources */,
-				9F71D9FE282B90A100F06C2F /* ViewController.swift in Sources */,
+				9F5B07CA282C22F800122600 /* PodcastCellViewModel.swift in Sources */,
+				9F71D9FE282B90A100F06C2F /* PodcastListViewController.swift in Sources */,
+				9F71DA37282B9CD300F06C2F /* UITableView+Extension.swift in Sources */,
 				9F71D9FA282B90A100F06C2F /* AppDelegate.swift in Sources */,
+				9F5B07C8282C1FAC00122600 /* PodcastListViewModel.swift in Sources */,
 				9F71DA2D282B926F00F06C2F /* MainCoordinator.swift in Sources */,
+				9F5B07CF282D6CED00122600 /* UIImageView+Extension.swift in Sources */,
+				9F71DA33282B9B2900F06C2F /* PodcastCell.swift in Sources */,
+				9F5B07C6282C1E9000122600 /* Podcast.swift in Sources */,
 				9F71D9FC282B90A100F06C2F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +676,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9F5B07CB282D6C9200122600 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9F5B07CC282D6C9200122600 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F5B07CB282D6C9200122600 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F71D9EE282B90A100F06C2F /* Project object */;
 }

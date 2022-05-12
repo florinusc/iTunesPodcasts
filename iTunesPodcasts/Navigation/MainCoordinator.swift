@@ -17,7 +17,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = ViewController()
+        let viewController = PodcastListViewController(viewModel: PodcastListViewModel())
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
