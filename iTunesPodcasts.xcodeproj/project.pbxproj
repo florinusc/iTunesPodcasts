@@ -26,6 +26,7 @@
 		9F5B07EE282E53EB00122600 /* PodcastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07ED282E53EB00122600 /* PodcastRequest.swift */; };
 		9F5B07F0282E78C000122600 /* PodcastListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07EF282E78C000122600 /* PodcastListViewModelTests.swift */; };
 		9F5B07F1282E793100122600 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07D8282E465000122600 /* MockRepository.swift */; };
+		9F5B07F3282E7EEF00122600 /* PodcastDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07F2282E7EEF00122600 /* PodcastDetailViewModelTests.swift */; };
 		9F71D9FA282B90A100F06C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9F9282B90A100F06C2F /* AppDelegate.swift */; };
 		9F71D9FC282B90A100F06C2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */; };
 		9F71D9FE282B90A100F06C2F /* PodcastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FD282B90A100F06C2F /* PodcastListViewController.swift */; };
@@ -73,6 +74,7 @@
 		9F5B07E9282E514700122600 /* OnlineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineRepository.swift; sourceTree = "<group>"; };
 		9F5B07ED282E53EB00122600 /* PodcastRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRequest.swift; sourceTree = "<group>"; };
 		9F5B07EF282E78C000122600 /* PodcastListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastListViewModelTests.swift; sourceTree = "<group>"; };
+		9F5B07F2282E7EEF00122600 /* PodcastDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewModelTests.swift; sourceTree = "<group>"; };
 		9F71D9F6282B90A100F06C2F /* iTunesPodcasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesPodcasts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F71D9F9282B90A100F06C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				9F5B07D8282E465000122600 /* MockRepository.swift */,
 				9F5B07EF282E78C000122600 /* PodcastListViewModelTests.swift */,
+				9F5B07F2282E7EEF00122600 /* PodcastDetailViewModelTests.swift */,
 			);
 			path = iTunesPodcastsTests;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5B07F3282E7EEF00122600 /* PodcastDetailViewModelTests.swift in Sources */,
 				9F5B07F0282E78C000122600 /* PodcastListViewModelTests.swift in Sources */,
 				9F5B07F1282E793100122600 /* MockRepository.swift in Sources */,
 			);
