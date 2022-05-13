@@ -52,12 +52,20 @@ class PodcastDetailViewController: UIViewController {
     
     private func addLabels() {
         artistLabel = UILabel()
+        artistLabel.numberOfLines = 0
+        artistLabel.font = .preferredFont(forTextStyle: .title2)
+        artistLabel.textAlignment = .center
         artistLabel.text = viewModel.artistName
         
         trackLabel = UILabel()
+        trackLabel.numberOfLines = 0
+        trackLabel.textAlignment = .center
         trackLabel.text = viewModel.trackName
         
         releaseDateLabel = UILabel()
+        releaseDateLabel.numberOfLines = 2
+        releaseDateLabel.font = .preferredFont(forTextStyle: .footnote)
+        releaseDateLabel.textAlignment = .center
         releaseDateLabel.text = viewModel.releaseDate
     }
     

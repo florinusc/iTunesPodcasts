@@ -12,7 +12,7 @@ class MainCoordinator: Coordinator {
     
     let navigationController: UINavigationController
     
-    private let repository = MockRepository()
+    private let repository = OnlineRepository()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

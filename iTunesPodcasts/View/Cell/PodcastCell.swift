@@ -58,7 +58,10 @@ class PodcastCell: UITableViewCell {
     
     private func addLabels() {
         artistLabel = UILabel()
+        artistLabel.numberOfLines = 2
+        artistLabel.font = .boldSystemFont(ofSize: 17)
         trackLabel = UILabel()
+        trackLabel.numberOfLines = 2
         
         labelsStackView = UIStackView(arrangedSubviews: [artistLabel, trackLabel])
         

@@ -13,3 +13,12 @@ struct Podcast: Hashable {
     let releaseDate: String
     let imageURL: String
 }
+
+extension Podcast {
+    init(resource: PodcastResource) {
+        self.artist = resource.artistName
+        self.track = resource.trackName
+        self.imageURL = resource.artworkURL
+        self.releaseDate = resource.releaseDate
+    }
+}
