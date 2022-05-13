@@ -19,8 +19,13 @@ class PodcastListViewModel {
     
     func getData() {
         snapshot.appendSections([.main])
-        snapshot.appendItems([Podcast(artist: "drake", track: "some", releaseDate: "", imageURL: "https://upload.wikimedia.org/wikipedia/en/c/c8/CarterIII.jpg")])
+        snapshot.appendItems([Podcast(artist: "drake", track: "some", releaseDate: "5th of May 2012", imageURL: "https://upload.wikimedia.org/wikipedia/en/c/c8/CarterIII.jpg")])
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel {
+        let podcast = snapshot.itemIdentifiers[index]
+        return PodcastDetailViewModel(podcast: podcast)
     }
     
 }

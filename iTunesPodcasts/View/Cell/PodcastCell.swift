@@ -9,7 +9,9 @@ import UIKit
 
 class PodcastCell: UITableViewCell {
     
+    private var mainStackView: UIStackView!
     private var podcastImageView: UIImageView!
+    private var labelsStackView: UIStackView!
     private var artistLabel: UILabel!
     private var trackLabel: UILabel!
     
@@ -21,9 +23,26 @@ class PodcastCell: UITableViewCell {
         }
     }
     
+    override var reuseIdentifier: String? {
+        return String(describing: Self.self)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        addViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addViews() {
+        addImageView()
+        addLabels()
+        addMainStackView()
+    }
+    
+    private func addImageView() {
         podcastImageView = UIImageView()
         
         podcastImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,17 +54,21 @@ class PodcastCell: UITableViewCell {
         imageViewHeightConstraint.priority = UILayoutPriority(999)
         imageViewHeightConstraint.isActive = true
         podcastImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
+    }
+    
+    private func addLabels() {
         artistLabel = UILabel()
         trackLabel = UILabel()
         
-        let labelsStackView = UIStackView(arrangedSubviews: [artistLabel, trackLabel])
+        labelsStackView = UIStackView(arrangedSubviews: [artistLabel, trackLabel])
         
         labelsStackView.alignment = .fill
         labelsStackView.distribution = .fillEqually
         labelsStackView.axis = .vertical
-        
-        let mainStackView = UIStackView(arrangedSubviews: [podcastImageView, labelsStackView])
+    }
+    
+    private func addMainStackView() {
+        mainStackView = UIStackView(arrangedSubviews: [podcastImageView, labelsStackView])
         
         mainStackView.alignment = .fill
         mainStackView.distribution = .fill
@@ -60,15 +83,6 @@ class PodcastCell: UITableViewCell {
         mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override var reuseIdentifier: String? {
-        return String(describing: Self.self)
     }
     
 }

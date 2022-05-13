@@ -22,4 +22,10 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func presentDetail(with viewModel: PodcastDetailViewModel) {
+        let viewController = PodcastDetailViewController.init(viewModel: viewModel)
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
 }

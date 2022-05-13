@@ -32,19 +32,17 @@ class PodcastListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func loadView() {
+        super.loadView()
         view.backgroundColor = .white
-        
-        title = "Podcasts"
-        
         addViews()
-        
+        setUp()
+    }
+    
+    private func setUp() {
+        title = "Podcasts"
         viewModel.dataSource = createDataSource()
-        
         tableView.registerCell(PodcastCell.self)
-        
         viewModel.getData()
     }
     
@@ -89,14 +87,18 @@ class PodcastListViewController: UIViewController {
             return cell
         }
     }
+    
 }
 
 extension PodcastListViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        coordinator?.presentDetail(with: viewModel.podcastDetailViewModel(at: indexPath.row))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
 }
