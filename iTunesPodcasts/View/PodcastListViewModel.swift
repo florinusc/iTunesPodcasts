@@ -38,7 +38,8 @@ class PodcastListViewModel {
         }
     }
     
-    func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel {
+    func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel? {
+        guard snapshot.itemIdentifiers.count >= 0, index < snapshot.itemIdentifiers.count else { return nil }
         let podcast = snapshot.itemIdentifiers[index]
         return PodcastDetailViewModel(podcast: podcast)
     }
