@@ -22,6 +22,7 @@ class PodcastListViewController: UIViewController {
     
     private var searchBar: UISearchBar!
     private var tableView: UITableView!
+    private var loadingViewController: LoadingViewController?
     
     init(viewModel: PodcastListViewModel) {
         self.viewModel = viewModel
@@ -43,7 +44,6 @@ class PodcastListViewController: UIViewController {
         title = "Podcasts"
         viewModel.dataSource = createDataSource()
         tableView.registerCell(PodcastCell.self)
-        viewModel.getData()
     }
     
     private func addViews() {
@@ -53,6 +53,9 @@ class PodcastListViewController: UIViewController {
     
     private func addSearchBar() {
         searchBar = UISearchBar()
+        
+        searchBar.delegate = self
+        searchBar.placeholder = "Name, collection or creator"
         
         view.addSubview(searchBar)
         
@@ -88,6 +91,26 @@ class PodcastListViewController: UIViewController {
         }
     }
     
+    private func addLoadingViewController() {
+        loadingViewController = LoadingViewController()
+        guard let loadingViewController = loadingViewController else { return }
+        add(loadingViewController)
+    }
+    
+    private func removeLoadingViewController() {
+        loadingViewController?.remove()
+    }
+    
+    private func getData(searchTerm: String) {
+        addLoadingViewController()
+        viewModel.getData(searchTerm: searchTerm) { [weak self] error in
+            self?.removeLoadingViewController()
+            if let error = error {
+                self?.presentAlert(for: error)
+            }
+        }
+    }
+    
 }
 
 extension PodcastListViewController: UITableViewDelegate {
@@ -99,6 +122,16 @@ extension PodcastListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+}
+
+extension PodcastListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text else { return }
+        view.endEditing(true)
+        getData(searchTerm: searchTerm)
     }
     
 }

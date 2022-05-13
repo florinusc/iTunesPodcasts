@@ -14,6 +14,11 @@
 		9F5B07CF282D6CED00122600 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */; };
 		9F5B07D1282D6FC600122600 /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07D0282D6FC600122600 /* PodcastDetailViewController.swift */; };
 		9F5B07D3282D6FD100122600 /* PodcastDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07D2282D6FD100122600 /* PodcastDetailViewModel.swift */; };
+		9F5B07D7282E45CC00122600 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07D6282E45CC00122600 /* Repository.swift */; };
+		9F5B07D9282E465000122600 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07D8282E465000122600 /* MockRepository.swift */; };
+		9F5B07DB282E46BF00122600 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07DA282E46BF00122600 /* CustomError.swift */; };
+		9F5B07DD282E4B9000122600 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07DC282E4B9000122600 /* UIViewController+Extension.swift */; };
+		9F5B07DF282E4BDE00122600 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5B07DE282E4BDE00122600 /* LoadingViewController.swift */; };
 		9F71D9FA282B90A100F06C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9F9282B90A100F06C2F /* AppDelegate.swift */; };
 		9F71D9FC282B90A100F06C2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */; };
 		9F71D9FE282B90A100F06C2F /* PodcastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71D9FD282B90A100F06C2F /* PodcastListViewController.swift */; };
@@ -50,6 +55,11 @@
 		9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		9F5B07D0282D6FC600122600 /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
 		9F5B07D2282D6FD100122600 /* PodcastDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewModel.swift; sourceTree = "<group>"; };
+		9F5B07D6282E45CC00122600 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		9F5B07D8282E465000122600 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
+		9F5B07DA282E46BF00122600 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		9F5B07DC282E4B9000122600 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		9F5B07DE282E4BDE00122600 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9F71D9F6282B90A100F06C2F /* iTunesPodcasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesPodcasts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F71D9F9282B90A100F06C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F71D9FB282B90A100F06C2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +110,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9F5B07D4282E45BA00122600 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9F5B07D6282E45CC00122600 /* Repository.swift */,
+				9F5B07D8282E465000122600 /* MockRepository.swift */,
+				9F5B07DA282E46BF00122600 /* CustomError.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9F5B07D5282E45C000122600 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		9F71D9ED282B90A100F06C2F = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +149,8 @@
 		9F71D9F8282B90A100F06C2F /* iTunesPodcasts */ = {
 			isa = PBXGroup;
 			children = (
+				9F5B07D5282E45C000122600 /* Network */,
+				9F5B07D4282E45BA00122600 /* Data */,
 				9F5B07C4282C1E8600122600 /* Model */,
 				9F71DA34282B9CC100F06C2F /* Helpers */,
 				9F71DA30282B931500F06C2F /* View */,
@@ -176,6 +205,7 @@
 				9F5B07C7282C1FAC00122600 /* PodcastListViewModel.swift */,
 				9F5B07D0282D6FC600122600 /* PodcastDetailViewController.swift */,
 				9F5B07D2282D6FD100122600 /* PodcastDetailViewModel.swift */,
+				9F5B07DE282E4BDE00122600 /* LoadingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +232,7 @@
 			children = (
 				9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */,
 				9F5B07CE282D6CED00122600 /* UIImageView+Extension.swift */,
+				9F5B07DC282E4B9000122600 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -343,12 +374,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F71DA2B282B925500F06C2F /* Coordinator.swift in Sources */,
+				9F5B07DB282E46BF00122600 /* CustomError.swift in Sources */,
 				9F5B07CA282C22F800122600 /* PodcastCellViewModel.swift in Sources */,
 				9F5B07D3282D6FD100122600 /* PodcastDetailViewModel.swift in Sources */,
 				9F71D9FE282B90A100F06C2F /* PodcastListViewController.swift in Sources */,
+				9F5B07DF282E4BDE00122600 /* LoadingViewController.swift in Sources */,
 				9F71DA37282B9CD300F06C2F /* UITableView+Extension.swift in Sources */,
 				9F5B07D1282D6FC600122600 /* PodcastDetailViewController.swift in Sources */,
 				9F71D9FA282B90A100F06C2F /* AppDelegate.swift in Sources */,
+				9F5B07DD282E4B9000122600 /* UIViewController+Extension.swift in Sources */,
+				9F5B07D9282E465000122600 /* MockRepository.swift in Sources */,
+				9F5B07D7282E45CC00122600 /* Repository.swift in Sources */,
 				9F5B07C8282C1FAC00122600 /* PodcastListViewModel.swift in Sources */,
 				9F71DA2D282B926F00F06C2F /* MainCoordinator.swift in Sources */,
 				9F5B07CF282D6CED00122600 /* UIImageView+Extension.swift in Sources */,

@@ -9,6 +9,7 @@ import Foundation
 
 class PodcastListViewModel {
     
+    private let repository: Repository
     private var snapshot = PodcastSnapshot()
     
     var dataSource: PodcastDataSource! {
@@ -17,10 +18,24 @@ class PodcastListViewModel {
         }
     }
     
-    func getData() {
-        snapshot.appendSections([.main])
-        snapshot.appendItems([Podcast(artist: "drake", track: "some", releaseDate: "5th of May 2012", imageURL: "https://upload.wikimedia.org/wikipedia/en/c/c8/CarterIII.jpg")])
-        dataSource.apply(snapshot, animatingDifferences: true)
+    init(repository: Repository) {
+        self.repository = repository
+    }
+    
+    func getData(searchTerm: String, _ handler: @escaping (Error?) -> Void) {
+        snapshot.deleteAllItems()
+        repository.getPodcasts(searchTerm: searchTerm) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                handler(error)
+            case .success(let podcasts):
+                self.snapshot.appendSections([.main])
+                self.snapshot.appendItems(podcasts)
+                self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                handler(nil)
+            }
+        }
     }
     
     func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel {

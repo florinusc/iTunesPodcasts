@@ -12,12 +12,14 @@ class MainCoordinator: Coordinator {
     
     let navigationController: UINavigationController
     
+    private let repository = MockRepository()
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let viewController = PodcastListViewController(viewModel: PodcastListViewModel())
+        let viewController = PodcastListViewController(viewModel: PodcastListViewModel(repository: repository))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
