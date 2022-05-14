@@ -18,6 +18,8 @@ class PodcastDetailViewController: UIViewController {
     private var trackLabel: UILabel!
     private var releaseDateLabel: UILabel!
     private var stackView: UIStackView!
+    private var scrollView: UIScrollView!
+    private var contentView: UIView!
     
     init(viewModel: PodcastDetailViewModel) {
         self.viewModel = viewModel
@@ -35,6 +37,7 @@ class PodcastDetailViewController: UIViewController {
     }
     
     private func addViews() {
+        addScrollView()
         addPodcastImageView()
         addLabels()
         addStackView()
@@ -71,19 +74,40 @@ class PodcastDetailViewController: UIViewController {
     
     private func addStackView() {
         stackView = UIStackView(arrangedSubviews: [podcastImageView, artistLabel, trackLabel, releaseDateLabel])
-        
+
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .fill
         stackView.alignment = .center
-        
-        view.addSubview(stackView)
-        
+
+        contentView.addSubview(stackView)
+
         stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    }
+    
+    private func addScrollView() {
+        scrollView = UIScrollView()
+        contentView = UIView()
         
-        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
     }
     
 }

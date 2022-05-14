@@ -9,13 +9,11 @@ import UIKit
 
 class LoadingViewController: UIViewController {
     
-    // MARK: - Lifecycle
     override func loadView() {
         super.loadView()
         addViews()
     }
     
-    // MARK: - Private functions
     private func addViews() {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false

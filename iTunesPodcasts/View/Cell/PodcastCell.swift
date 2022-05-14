@@ -17,9 +17,8 @@ class PodcastCell: UITableViewCell {
     
     var viewModel: PodcastCellViewModel? {
         didSet {
-            artistLabel.text = viewModel?.artistName
-            trackLabel.text = viewModel?.trackName
-            podcastImageView.setImage(with: viewModel?.imageURL)
+            guard let viewModel = viewModel else { return }
+            setUp(with: viewModel)
         }
     }
     
@@ -34,6 +33,12 @@ class PodcastCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUp(with viewModel: PodcastCellViewModel) {
+        artistLabel.text = viewModel.artistName
+        trackLabel.text = viewModel.trackName
+        podcastImageView.setImage(with: viewModel.imageURL)
     }
     
     private func addViews() {
