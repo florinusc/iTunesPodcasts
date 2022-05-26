@@ -11,9 +11,6 @@ import RxCocoa
 
 class PodcastListViewModel {
     
-    let searchTermRelay = BehaviorRelay<String?>(value: nil)
-    let searchRelay = PublishRelay<Void>()
-    
     private let repository: Repository
     private var snapshot = PodcastSnapshot()
     private let disposeBag = DisposeBag()
@@ -37,19 +34,10 @@ class PodcastListViewModel {
     
     init(repository: Repository) {
         self.repository = repository
-        searchRelay.subscribe { [weak self] _ in
-            guard let self = self,
-                  let searchTerm = self.searchTermRelay.value else { return }
-            self._isLoading.accept(true)
-            self.getData(searchTerm: searchTerm) { error in
-                self._isLoading.accept(false)
-                self._error.accept(error)
-            }
-        }
-        .disposed(by: disposeBag)
     }
     
-    private func getData(searchTerm: String, _ handler: @escaping (Error?) -> Void) {
+    func getData(searchTerm: String) {
+        self._isLoading.accept(true)
         snapshot.deleteAllItems()
         repository.getPodcasts(searchTerm: searchTerm)
             .subscribe { result in
@@ -58,10 +46,10 @@ class PodcastListViewModel {
                     self.snapshot.appendSections([.main])
                     self.snapshot.appendItems(podcasts)
                     self.dataSource.apply(self.snapshot, animatingDifferences: true)
-                    handler(nil)
                 case .failure(let error):
-                    handler(error)
+                    self._error.accept(error)
                 }
+                self._isLoading.accept(false)
             }
             .disposed(by: disposeBag)
     }

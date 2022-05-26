@@ -82,7 +82,14 @@ class PodcastListViewController: UIViewController {
         searchBar.rx.searchButtonClicked
             .asDriver()
             .drive(onNext: { [weak self] in
-                self?.view.endEditing(true)
+                guard
+                    let self = self,
+                    let searchTerm = self.searchBar.text
+                else {
+                    return
+                }
+                self.view.endEditing(true)
+                self.viewModel.getData(searchTerm: searchTerm)
             })
             .disposed(by: disposeBag)
     }
@@ -94,13 +101,6 @@ class PodcastListViewController: UIViewController {
     
     private func addSearchBar() {
         searchBar = UISearchBar()
-        
-        searchBar.rx.text
-            .bind(to: viewModel.searchTermRelay)
-            .disposed(by: disposeBag)
-        searchBar.rx.searchButtonClicked
-            .bind(to: viewModel.searchRelay)
-            .disposed(by: disposeBag)
         
         searchBar.placeholder = "Name, collection or creator"
         
