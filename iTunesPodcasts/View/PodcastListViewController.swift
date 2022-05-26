@@ -9,13 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum PodcastSection {
-    case main
-}
-
-typealias PodcastDataSource = UITableViewDiffableDataSource<PodcastSection, Podcast>
-typealias PodcastSnapshot = NSDiffableDataSourceSnapshot<PodcastSection, Podcast>
-
 class PodcastListViewController: UIViewController {
 
     private let viewModel: PodcastListViewModel
@@ -56,7 +49,7 @@ class PodcastListViewController: UIViewController {
     }
     
     private func addSubscriberForLoadingState() {
-        viewModel.isLoading
+        viewModel.state.map { $0.isLoading }
             .drive(onNext: { [weak self] isLoading in
                 if isLoading {
                     self?.addLoadingViewController()
@@ -68,7 +61,7 @@ class PodcastListViewController: UIViewController {
     }
     
     private func addSubscriberForError() {
-        viewModel.error
+        viewModel.state.map({ $0.error })
             .drive(onNext: { [weak self] error in
                 if let error = error {
                     self?.presentAlert(for: error)
@@ -131,9 +124,9 @@ class PodcastListViewController: UIViewController {
     }
     
     private func bindTableView() {
-        viewModel.podcastCellViewModels
-            .drive(tableView.rx.items(cellIdentifier: String(describing: PodcastCell.self), cellType: PodcastCell.self)) { _, podcastCellViewModel, cell in
-            cell.viewModel = podcastCellViewModel
+        viewModel.state.compactMap { $0.value }
+            .drive(tableView.rx.items(cellIdentifier: String(describing: PodcastCell.self), cellType: PodcastCell.self)) { _, podcast, cell in
+            cell.viewModel = PodcastCellViewModel(podcast: podcast)
         }
         .disposed(by: disposeBag)
         

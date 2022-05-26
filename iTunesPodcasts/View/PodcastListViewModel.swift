@@ -15,20 +15,12 @@ class PodcastListViewModel {
     private let disposeBag = DisposeBag()
     
     private let _isLoading = BehaviorRelay<Bool>(value: false)
-    private let _error = BehaviorRelay<Error?>(value: nil)
+    private let _error = PublishRelay<Error>()
     
-    private var _podcasts = BehaviorSubject<[Podcast]>(value: [])
+    private let _state = BehaviorRelay<Loadable<[Podcast]>>(value: .notRequested)
     
-    var isLoading: Driver<Bool> {
-        return _isLoading.asDriver()
-    }
-    
-    var error: Driver<Error?> {
-        return _error.asDriver()
-    }
-    
-    var podcastCellViewModels: Driver<[PodcastCellViewModel]> {
-        return _podcasts.map({ $0.map { PodcastCellViewModel(podcast: $0) } }).asDriver(onErrorJustReturn: [])
+    var state: Driver<Loadable<[Podcast]>> {
+        return _state.asDriver()
     }
     
     init(repository: Repository) {
@@ -36,22 +28,22 @@ class PodcastListViewModel {
     }
     
     func getData(searchTerm: String) {
-        self._isLoading.accept(true)
+        _state.accept(.isLoading)
         repository.getPodcasts(searchTerm: searchTerm)
-            .subscribe { result in
+            .subscribe { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let podcasts):
-                    self._podcasts.onNext(podcasts)
+                    self._state.accept(.loaded(podcasts))
                 case .failure(let error):
-                    self._error.accept(error)
+                    self._state.accept(.failed(error))
                 }
-                self._isLoading.accept(false)
             }
             .disposed(by: disposeBag)
     }
     
     func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel? {
-        guard let podcasts = try? _podcasts.value() else { return nil }
+        guard case .loaded(let podcasts) = _state.value  else { return nil }
         guard podcasts.count >= 0, index < podcasts.count else { return nil }
         let podcast = podcasts[index]
         return PodcastDetailViewModel(podcast: podcast)

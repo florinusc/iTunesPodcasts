@@ -35,6 +35,8 @@
 		9F71DA2D282B926F00F06C2F /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA2C282B926F00F06C2F /* MainCoordinator.swift */; };
 		9F71DA33282B9B2900F06C2F /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA32282B9B2900F06C2F /* PodcastCell.swift */; };
 		9F71DA37282B9CD300F06C2F /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */; };
+		9FD0D5BB283F86050023A59A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD0D5BA283F86050023A59A /* XCTest.framework */; };
+		9FD0D5BD283FCCB20023A59A /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD0D5BC283FCCB20023A59A /* Loadable.swift */; };
 		DF2A648F2230634D351207EB /* Pods_iTunesPodcasts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC7902BC0C78079D3DBCE0C /* Pods_iTunesPodcasts.framework */; };
 		FD9A73827678C67293728AC2 /* Pods_iTunesPodcastsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325C54814E7BE6C9B25C7207 /* Pods_iTunesPodcastsTests.framework */; };
 /* End PBXBuildFile section */
@@ -127,6 +129,8 @@
 		9F71DA2C282B926F00F06C2F /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		9F71DA32282B9B2900F06C2F /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		9F71DA36282B9CD300F06C2F /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		9FD0D5BA283F86050023A59A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9FD0D5BC283FCCB20023A59A /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		DA5B8FB82A786F52BFB40753 /* Pods-iTunesPodcasts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesPodcasts.debug.xcconfig"; path = "Target Support Files/Pods-iTunesPodcasts/Pods-iTunesPodcasts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD0D5BB283F86050023A59A /* XCTest.framework in Frameworks */,
 				FD9A73827678C67293728AC2 /* Pods_iTunesPodcastsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				9F5B07C5282C1E9000122600 /* Podcast.swift */,
+				9FD0D5BC283FCCB20023A59A /* Loadable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 		9FD0D584283EA8050023A59A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FD0D5BA283F86050023A59A /* XCTest.framework */,
 				4FC7902BC0C78079D3DBCE0C /* Pods_iTunesPodcasts.framework */,
 				325C54814E7BE6C9B25C7207 /* Pods_iTunesPodcastsTests.framework */,
 			);
@@ -560,6 +567,7 @@
 				9F5B07CA282C22F800122600 /* PodcastCellViewModel.swift in Sources */,
 				9F5B07EA282E514700122600 /* OnlineRepository.swift in Sources */,
 				9F5B07E8282E510500122600 /* PodcastSearchResultResource.swift in Sources */,
+				9FD0D5BD283FCCB20023A59A /* Loadable.swift in Sources */,
 				9F5B07E1282E4F9600122600 /* SessionManager.swift in Sources */,
 				9F5B07E5282E50CB00122600 /* Request.swift in Sources */,
 				9F5B07D3282D6FD100122600 /* PodcastDetailViewModel.swift in Sources */,
@@ -661,7 +669,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_TESTING_SEARCH_PATHS = NO;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -722,7 +730,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTING_SEARCH_PATHS = NO;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
