@@ -12,11 +12,12 @@ import RxCocoa
 class PodcastListViewModel {
     
     private let repository: Repository
-    private var snapshot = PodcastSnapshot()
     private let disposeBag = DisposeBag()
     
     private let _isLoading = BehaviorRelay<Bool>(value: false)
     private let _error = BehaviorRelay<Error?>(value: nil)
+    
+    private var _podcasts = BehaviorSubject<[Podcast]>(value: [])
     
     var isLoading: Driver<Bool> {
         return _isLoading.asDriver()
@@ -26,10 +27,8 @@ class PodcastListViewModel {
         return _error.asDriver()
     }
     
-    var dataSource: PodcastDataSource! {
-        didSet {
-            dataSource.apply(snapshot, animatingDifferences: true)
-        }
+    var podcastCellViewModels: Driver<[PodcastCellViewModel]> {
+        return _podcasts.map({ $0.map { PodcastCellViewModel(podcast: $0) } }).asDriver(onErrorJustReturn: [])
     }
     
     init(repository: Repository) {
@@ -38,14 +37,11 @@ class PodcastListViewModel {
     
     func getData(searchTerm: String) {
         self._isLoading.accept(true)
-        snapshot.deleteAllItems()
         repository.getPodcasts(searchTerm: searchTerm)
             .subscribe { result in
                 switch result {
                 case .success(let podcasts):
-                    self.snapshot.appendSections([.main])
-                    self.snapshot.appendItems(podcasts)
-                    self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                    self._podcasts.onNext(podcasts)
                 case .failure(let error):
                     self._error.accept(error)
                 }
@@ -55,8 +51,9 @@ class PodcastListViewModel {
     }
     
     func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel? {
-        guard snapshot.itemIdentifiers.count >= 0, index < snapshot.itemIdentifiers.count else { return nil }
-        let podcast = snapshot.itemIdentifiers[index]
+        guard let podcasts = try? _podcasts.value() else { return nil }
+        guard podcasts.count >= 0, index < podcasts.count else { return nil }
+        let podcast = podcasts[index]
         return PodcastDetailViewModel(podcast: podcast)
     }
     

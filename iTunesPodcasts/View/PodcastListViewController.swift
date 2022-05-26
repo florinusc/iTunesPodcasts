@@ -45,7 +45,6 @@ class PodcastListViewController: UIViewController {
     
     private func setUp() {
         title = "Podcasts"
-        viewModel.dataSource = createDataSource()
         tableView.registerCell(PodcastCell.self)
         addSubscribers()
     }
@@ -116,7 +115,7 @@ class PodcastListViewController: UIViewController {
     private func addTableView() {
         tableView = UITableView()
         
-        tableView.delegate = self
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
         tableView.keyboardDismissMode = .interactive
         
         view.addSubview(tableView)
@@ -127,15 +126,23 @@ class PodcastListViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        bindTableView()
     }
     
-    private func createDataSource() -> PodcastDataSource {
-        return PodcastDataSource(tableView: tableView) { (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
-            let podcastCellViewModel = PodcastCellViewModel(podcast: itemIdentifier)
-            let cell: PodcastCell = tableView.dequeueCell()
+    private func bindTableView() {
+        viewModel.podcastCellViewModels
+            .drive(tableView.rx.items(cellIdentifier: String(describing: PodcastCell.self), cellType: PodcastCell.self)) { _, podcastCellViewModel, cell in
             cell.viewModel = podcastCellViewModel
-            return cell
         }
+        .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
+            self?.tableView.deselectRow(at: indexPath, animated: true)
+            guard let podcastDetailViewModel = self?.viewModel.podcastDetailViewModel(at: indexPath.row) else { return }
+            self?.coordinator?.presentDetail(with: podcastDetailViewModel)
+        })
+        .disposed(by: disposeBag)
     }
     
     private func addLoadingViewController() {
@@ -150,16 +157,4 @@ class PodcastListViewController: UIViewController {
     
 }
 
-extension PodcastListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let podcastDetailViewModel = viewModel.podcastDetailViewModel(at: indexPath.row) else { return }
-        coordinator?.presentDetail(with: podcastDetailViewModel)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-}
+extension PodcastListViewController: UITableViewDelegate {}
