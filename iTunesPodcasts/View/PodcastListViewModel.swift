@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import RxSwift
 
 class PodcastListViewModel {
     
     private let repository: Repository
     private var snapshot = PodcastSnapshot()
+    private let disposeBag = DisposeBag()
     
     var dataSource: PodcastDataSource! {
         didSet {
@@ -24,18 +26,19 @@ class PodcastListViewModel {
     
     func getData(searchTerm: String, _ handler: @escaping (Error?) -> Void) {
         snapshot.deleteAllItems()
-        repository.getPodcasts(searchTerm: searchTerm) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .failure(let error):
-                handler(error)
-            case .success(let podcasts):
-                self.snapshot.appendSections([.main])
-                self.snapshot.appendItems(podcasts)
-                self.dataSource.apply(self.snapshot, animatingDifferences: true)
-                handler(nil)
+        repository.getPodcasts(searchTerm: searchTerm)
+            .subscribe { result in
+                switch result {
+                case .success(let podcasts):
+                    self.snapshot.appendSections([.main])
+                    self.snapshot.appendItems(podcasts)
+                    self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                    handler(nil)
+                case .failure(let error):
+                    handler(error)
+                }
             }
-        }
+            .disposed(by: disposeBag)
     }
     
     func podcastDetailViewModel(at index: Int) -> PodcastDetailViewModel? {

@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol Repository {
-    func getPodcasts(searchTerm: String, completion handler: @escaping (Result<[Podcast], Error>) -> Void)
+    func getPodcasts(searchTerm: String) -> Single<[Podcast]>
 }
