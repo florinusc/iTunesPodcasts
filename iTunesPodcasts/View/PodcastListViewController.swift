@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 enum PodcastSection {
     case main
@@ -17,6 +19,7 @@ typealias PodcastSnapshot = NSDiffableDataSourceSnapshot<PodcastSection, Podcast
 class PodcastListViewController: UIViewController {
 
     private let viewModel: PodcastListViewModel
+    private let disposeBag = DisposeBag()
     
     weak var coordinator: MainCoordinator?
     
@@ -44,6 +47,44 @@ class PodcastListViewController: UIViewController {
         title = "Podcasts"
         viewModel.dataSource = createDataSource()
         tableView.registerCell(PodcastCell.self)
+        addSubscribers()
+    }
+    
+    private func addSubscribers() {
+        addSubscriberForLoadingState()
+        addSubscriberForError()
+        addSubscriberForSearch()
+    }
+    
+    private func addSubscriberForLoadingState() {
+        viewModel.isLoading
+            .drive(onNext: { [weak self] isLoading in
+                if isLoading {
+                    self?.addLoadingViewController()
+                } else {
+                    self?.removeLoadingViewController()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func addSubscriberForError() {
+        viewModel.error
+            .drive(onNext: { [weak self] error in
+                if let error = error {
+                    self?.presentAlert(for: error)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func addSubscriberForSearch() {
+        searchBar.rx.searchButtonClicked
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addViews() {
@@ -54,7 +95,13 @@ class PodcastListViewController: UIViewController {
     private func addSearchBar() {
         searchBar = UISearchBar()
         
-        searchBar.delegate = self
+        searchBar.rx.text
+            .bind(to: viewModel.searchTermRelay)
+            .disposed(by: disposeBag)
+        searchBar.rx.searchButtonClicked
+            .bind(to: viewModel.searchRelay)
+            .disposed(by: disposeBag)
+        
         searchBar.placeholder = "Name, collection or creator"
         
         view.addSubview(searchBar)
@@ -101,16 +148,6 @@ class PodcastListViewController: UIViewController {
         loadingViewController?.remove()
     }
     
-    private func getData(searchTerm: String) {
-        addLoadingViewController()
-        viewModel.getData(searchTerm: searchTerm) { [weak self] error in
-            self?.removeLoadingViewController()
-            if let error = error {
-                self?.presentAlert(for: error)
-            }
-        }
-    }
-    
 }
 
 extension PodcastListViewController: UITableViewDelegate {
@@ -123,16 +160,6 @@ extension PodcastListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-    }
-    
-}
-
-extension PodcastListViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchTerm = searchBar.text else { return }
-        view.endEditing(true)
-        getData(searchTerm: searchTerm)
     }
     
 }
