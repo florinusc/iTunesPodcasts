@@ -11,10 +11,13 @@
 
 - iOS 15.4
 - Xcode 13.3.1
+- Cocoapods
 
 ## Run
 
-Open `iTunesPodcasts.xcodeproj` and run.
+Run `pod install` in project folder
+
+Open `iTunesPodcasts.xcworkspace` and run.
 
 ## Meta
 
