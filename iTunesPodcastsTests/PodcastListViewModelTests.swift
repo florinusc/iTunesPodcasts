@@ -7,15 +7,12 @@
 
 import XCTest
 import RxSwift
-import RxCocoa
-import RxBlocking
 import RxTest
 @testable import iTunesPodcasts
 
 class PodcastListViewModelTests: XCTestCase {
     
     var scheduler: TestScheduler!
-    
     var disposeBag: DisposeBag!
 
     override func setUp() {
