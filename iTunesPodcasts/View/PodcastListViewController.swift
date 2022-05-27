@@ -72,8 +72,7 @@ class PodcastListViewController: UIViewController {
     
     private func addSubscriberForSearch() {
         searchBar.rx.searchButtonClicked
-            .asDriver()
-            .drive(onNext: { [weak self] in
+            .subscribe(onNext: { [weak self] in
                 guard
                     let self = self,
                     let searchTerm = self.searchBar.text
@@ -126,16 +125,17 @@ class PodcastListViewController: UIViewController {
     private func bindTableView() {
         viewModel.state.compactMap { $0.value }
             .drive(tableView.rx.items(cellIdentifier: String(describing: PodcastCell.self), cellType: PodcastCell.self)) { _, podcast, cell in
-            cell.viewModel = PodcastCellViewModel(podcast: podcast)
-        }
-        .disposed(by: disposeBag)
+                cell.viewModel = PodcastCellViewModel(podcast: podcast)
+            }
+            .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            self?.tableView.deselectRow(at: indexPath, animated: true)
-            guard let podcastDetailViewModel = self?.viewModel.podcastDetailViewModel(at: indexPath.row) else { return }
-            self?.coordinator?.presentDetail(with: podcastDetailViewModel)
-        })
-        .disposed(by: disposeBag)
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+                guard let podcastDetailViewModel = self?.viewModel.podcastDetailViewModel(at: indexPath.row) else { return }
+                self?.coordinator?.presentDetail(with: podcastDetailViewModel)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addLoadingViewController() {
